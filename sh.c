@@ -7,6 +7,7 @@
 #define BUFF_SIZE 512
 #define TOK_BUFF_SIZE 64
 #define TOK_DELIM " \t\n"
+#define PATH_MAX 4096
 
 void trim(char* line)
 {
@@ -226,11 +227,13 @@ int main(void)
 	char** tokens;
 	char** args;
 	char*** commands;
+	char cwd[PATH_MAX];
 	while (1)
 	{
 		fflush(stdout);
+		getcwd(cwd, sizeof(cwd));
 
-		printf(">>> ");
+		printf("%s > ", cwd);
 		fgets(line, BUFF_SIZE, stdin);
 
 		trim(line);
