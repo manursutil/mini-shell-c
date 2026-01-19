@@ -238,18 +238,25 @@ int main(void)
 		if (strcmp(args[0], "cd") == 0)
 		{
 			sh_cd(args);
+			free(tokens);
 			continue;
 		}
-		if (strcmp(args[0], "exit") == 0) break;
+		if (strcmp(args[0], "exit") == 0) 
+		{
+			free(tokens);
+			break;
+		}
 		
 		if (check_pipes(args))
 		{
 			commands = split_pipes(args);
 			run_pipe(commands);
+			free(tokens);
 		}
 		else
 		{
 			run_single(args);
+			free(tokens);
 		}
 	}	
 	return 0;
